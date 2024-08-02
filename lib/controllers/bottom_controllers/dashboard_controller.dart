@@ -7,6 +7,7 @@ import 'package:chatzy/controllers/recent_chat_controller.dart';
 import 'package:chatzy/screens/bottom_screens/call_screen/layouts/contact_call.dart';
 import 'package:chatzy/screens/bottom_screens/chat_screen/chat_screen.dart';
 import 'package:chatzy/screens/bottom_screens/setting_screen/setting_screen.dart';
+import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/voice_chat_room_screen.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:country_codes/country_codes.dart';
 import 'package:flutter/services.dart';
@@ -195,6 +196,7 @@ class DashboardController extends GetxController
     ChatScreen(),
   //  CallScreen(),
     SettingScreen(),
+    VoiceChatRoomScreen(),
     ProfileScreen(),
   ];
 

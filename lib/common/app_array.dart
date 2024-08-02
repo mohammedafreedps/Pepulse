@@ -43,8 +43,13 @@ class AppArray {
      {
        "icon": eSvgAssets.call,
        "title": appFonts.profile,
-       "icon2": eSvgAssets.profileAdd
+       "icon2": eSvgAssets.callOut
      },
+     {
+      "icon": eSvgAssets.call,
+      "title" : appFonts.calls,
+      "icon2" : eSvgAssets.callOut
+     }
    ];
 
    var chatMenuList = [
