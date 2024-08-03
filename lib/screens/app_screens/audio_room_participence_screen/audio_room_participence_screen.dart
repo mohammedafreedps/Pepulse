@@ -17,12 +17,14 @@ class AudioRoomParticipenceScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
-              child: Text('Host'),
+            Center(
+              child: Text('Host',style: AppCss.manropeRegular13
+                      .textColor(appCtrl.appTheme.darkText),), 
             ),
             Expanded(child: participenceBuilder(true)),
-            const Center(
-              child: Text('Audience'),
+            Center(
+              child: Text('Audience',style: AppCss.manropeRegular13
+                      .textColor(appCtrl.appTheme.darkText),),
             ),
             Expanded(child: participenceBuilder(false)),
             GetX<AudioRoomController>(

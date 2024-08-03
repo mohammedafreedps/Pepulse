@@ -2,7 +2,7 @@ import 'package:chatzy/config.dart';
 import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/total_participens_indicator.dart';
 import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/voice_host_profile_pic.dart';
 
-Widget voiceChatTile({String hostName = 'Name'}){
+Widget voiceChatTile({String hostName = 'Name'}) {
   return Padding(
     padding: const EdgeInsets.all(10),
     child: SizedBox(
@@ -13,7 +13,9 @@ Widget voiceChatTile({String hostName = 'Name'}){
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               voiceHostProfilePic(),
-              Text(hostName),
+              Text(hostName,
+                  style: AppCss.manropeRegular13
+                      .textColor(appCtrl.appTheme.darkText)),
               totalParticipensIndicator()
             ],
           )
@@ -22,6 +24,3 @@ Widget voiceChatTile({String hostName = 'Name'}){
     ),
   );
 }
-
-
-

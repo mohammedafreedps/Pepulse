@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class VoiceChatRoomController extends GetxController {
   RxList<CallerDetailModel> callerDetailModel = <CallerDetailModel>[].obs;
   RxList<CallerDetailModel> allCallerDetailModel = <CallerDetailModel>[].obs;
+  RxList<CallerDetailModel> activeParticipence = <CallerDetailModel>[].obs;
 
   @override
   void onInit() {
@@ -42,6 +43,7 @@ class VoiceChatRoomController extends GetxController {
           .map((doc) => CallerDetailModel.fromDocumentSnapshot(doc))
           .toList();
       allCallerDetailModel.assignAll(_modelHolder);
+      activeParticipence.value = allCallerDetailModel.where((model) => model.channelId == 'testing').toList();
       _holder = _modelHolder.where((model) => model.isHostor == true).toList();
       print(_modelHolder.toString() + '-=-=-=-=--');
       callerDetailModel.assignAll(_holder);
@@ -58,7 +60,6 @@ class VoiceChatRoomController extends GetxController {
       List<CallerDetailModel> holdData = allCallerDetailModel
           .where((model) => model.phoneNumber == currentUser.phoneNumber)
           .toList();
-      // print(holdData[0].phoneNumber);
       await FirebaseFirestore.instance
           .collection('users')
           .doc(holdData[0].id)

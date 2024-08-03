@@ -69,7 +69,6 @@ class AudioRoomController extends GetxController {
           final DocumentSnapshot doc = querySnapshot.docs.first;
           await doc.reference.update({'channelId' : 'testing'});
         }
-        
       }
       await engine.enableLocalAudio(true);
       engine.registerEventHandler(RtcEngineEventHandler(

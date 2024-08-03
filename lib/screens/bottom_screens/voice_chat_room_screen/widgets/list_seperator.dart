@@ -1,5 +1,5 @@
 import 'package:chatzy/config.dart';
 
 Widget listSeperator(){
-  return Divider(color: Colors.grey,);
+  return Divider(color: appCtrl.appTheme.borderColor,);
 }
