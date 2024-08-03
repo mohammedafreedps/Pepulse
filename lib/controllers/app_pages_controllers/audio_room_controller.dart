@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/bottom_controllers/voice_chat_room_controller.dart';
@@ -20,6 +19,7 @@ class AudioRoomController extends GetxController {
   RxList<CallerDetailModel> hostAsParticipence = <CallerDetailModel>[].obs;
   RxList<CallerDetailModel> audianceAsParticipence = <CallerDetailModel>[].obs;
   RxList<CallerDetailModel> allParticipence = <CallerDetailModel>[].obs;
+  RxBool isHaveAccessToAddHost = false.obs;
 
   Timer? _timerForChatRoom;
 
@@ -35,18 +35,16 @@ class AudioRoomController extends GetxController {
     engine.leaveChannel();
     engine.release();
     endTimerForChatRoom();
+    isHaveAccessToAddHost.value = false;
   }
 
   void initializeAgora({required isBroadcaster}) async {
-    print(_timerForChatRoom == null.toString() +'sdfasdfsdaf==-=');
     if(_timerForChatRoom == null){
       _timerForChatRoom = Timer.periodic(Duration(seconds: 2), (timer){
-        print('timer working -=-==-=-=-=');
         populateParticipence();
       });
     }
     User? _currentUser = FirebaseAuth.instance.currentUser; 
-    print('agora init called-----');
     var status = await Permission.microphone.status;
     if (!status.isGranted) {
       await Permission.microphone.request();
@@ -59,6 +57,7 @@ class AudioRoomController extends GetxController {
       ));
       await engine.enableAudio();
       if (isBroadcaster) {
+        isHaveAccessToAddHost.value = true;
         await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
         isHost.value = true;
       } else {
@@ -73,22 +72,20 @@ class AudioRoomController extends GetxController {
       await engine.enableLocalAudio(true);
       engine.registerEventHandler(RtcEngineEventHandler(
         onJoinChannelSuccess: (connection, elapsed) async {
-          print('voiceall connected successfully');
           addToParticipence(true);
           populateParticipence();
           await engine.setEnableSpeakerphone(true);
         },
         onUserJoined: (connection, remoteUid, elapsed) {
-          print('new user joined');
           populateParticipence();
+          voiceChatRoomController.playJoinAudio();
         },
         onLeaveChannel: (connection, status) {
-          print('user left the caht');
+          voiceChatRoomController.playLeaveAudio();
           populateParticipence();
           addToParticipence(false);
         },
         onError: (err, msg) {
-          print(msg + 'error from agora');
         },
       ));
       await engine.enableAudioVolumeIndication(
@@ -132,8 +129,6 @@ class AudioRoomController extends GetxController {
 
   void populateParticipence() async {
     User? _user = FirebaseAuth.instance.currentUser;
-    // final QuerySnapshot querySnapshot1 =
-    //     await FirebaseFirestore.instance.collection('participence').get();
     final QuerySnapshot querySnapshot2 =
         await FirebaseFirestore.instance.collection('users').where('channelId', isEqualTo: 'testing').get();
     allParticipence.value = querySnapshot2.docs
@@ -141,6 +136,9 @@ class AudioRoomController extends GetxController {
         .toList();
     hostAsParticipence.value = allParticipence.where((model)=> model.isHostor == true && model.channelId == 'testing').toList();
     audianceAsParticipence.value = allParticipence.where((model)=> model.isHostor == false && model.channelId == 'testing').toList();
-    print(allParticipence.toString() +'sdfasdf-0-00-0-0');
+  }
+
+  void makeToHost(int index){
+    
   }
 }

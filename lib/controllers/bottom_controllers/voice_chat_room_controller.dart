@@ -1,6 +1,6 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:chatzy/config.dart';
 import 'package:chatzy/models/caller_detail_model.dart';
-import 'package:chatzy/models/vklm.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +12,17 @@ class VoiceChatRoomController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('onint=------==-=-=-=-=-=-=-=-=-=-=');
     fetchAllCallersDetail();
+  }
+
+  void playJoinAudio()async{
+    final player = AudioPlayer();
+    await player.play(AssetSource('mp3/join.mp3'));
+  }
+
+  void playLeaveAudio()async{
+    final player = AudioPlayer();
+    await player.play(AssetSource('mp3/leave.mp3'));
   }
 
   void fetchAllCallersDetail() async {
@@ -26,7 +35,6 @@ class VoiceChatRoomController extends GetxController {
       for (var doc in querySnapshot1.docs) {
         final data = doc.data() as Map<String, dynamic>;
         if (!data.containsKey('isHoster')) {
-          print('Document ${doc.id} is missing "isHoster" field. Updating...');
           await doc.reference.update({'isHoster': false});
           data['isHoster'] = false;
         }
@@ -45,18 +53,14 @@ class VoiceChatRoomController extends GetxController {
       allCallerDetailModel.assignAll(_modelHolder);
       activeParticipence.value = allCallerDetailModel.where((model) => model.channelId == 'testing').toList();
       _holder = _modelHolder.where((model) => model.isHostor == true).toList();
-      print(_modelHolder.toString() + '-=-=-=-=--');
       callerDetailModel.assignAll(_holder);
     } catch (e) {
-      print('Error fetching caller details: $e');
     }
   }
 
   void becomeHoster({required bool isHoster}) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
-      print(currentUser.phoneNumber);
-      print(allCallerDetailModel[0].phoneNumber);
       List<CallerDetailModel> holdData = allCallerDetailModel
           .where((model) => model.phoneNumber == currentUser.phoneNumber)
           .toList();
@@ -64,7 +68,6 @@ class VoiceChatRoomController extends GetxController {
           .collection('users')
           .doc(holdData[0].id)
           .update({'isHoster': isHoster, 'channelId': isHoster? 'testing': ''});
-      print('Becomed Hoster');
     }
     fetchAllCallersDetail();
   }

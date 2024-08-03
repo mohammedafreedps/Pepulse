@@ -16,7 +16,6 @@ class _DashboardState extends State<Dashboard>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   final dashboardCtrl = Get.put(DashboardController());
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -44,7 +43,6 @@ class _DashboardState extends State<Dashboard>
     firebaseCtrl.syncContact();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return PickupLayout(
@@ -68,15 +66,17 @@ class _DashboardState extends State<Dashboard>
                                 children: [
                                   Scaffold(
                                       floatingActionButton:
-                                          dashboardCtrl.tabController?.index == 0
-                                                  //     0 ||
-                                                  // dashboardCtrl.tabController
-                                                  //         ?.index ==
-                                                  //     1
+                                          dashboardCtrl.tabController?.index ==
+                                                  0
+                                              //     0 ||
+                                              // dashboardCtrl.tabController
+                                              //         ?.index ==
+                                              //     1
                                               ? FloatingActionButton(
                                                   shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius
-                                                          .circular(50)),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50)),
                                                   backgroundColor:
                                                       appCtrl.appTheme.primary,
                                                   onPressed: () => dashboardCtrl
@@ -87,11 +87,8 @@ class _DashboardState extends State<Dashboard>
                                                                   ?.index ==
                                                               0
                                                           ? eSvgAssets.message
-                                                          : eSvgAssets.mobile))
+                                                          : eSvgAssets.call))
                                               : Container(),
-
-
-
 
                                       // bottomNavigationBar: SizedBox(
                                       //         height: Sizes.s70,
@@ -147,71 +144,79 @@ class _DashboardState extends State<Dashboard>
                                       //     .paddingOnly(top: Insets.i1)
                                       //     .bottomNavDecoration(),
 
-
-
-
-
                                       body: SafeArea(
                                         child: Column(
                                           children: [
-                                        
                                             SizedBox(
-                                                height: Sizes.s70,
-                                                child: TabBar(
-                                                    onTap: (val) {
-                                                      dashboardCtrl.tabController
-                                                          ?.index = val;
-                                                      dashboardCtrl.update();
-                                                    },
-                                                    controller: dashboardCtrl.tabController,
-                                                    labelColor: appCtrl.appTheme.primary,
-                                                    labelStyle: AppCss.manropeSemiBold12.textColor(appCtrl.appTheme.primary),
-                                                    unselectedLabelColor: appCtrl.appTheme.greyText,
-                                                    unselectedLabelStyle: AppCss.manropeSemiBold12.textColor(appCtrl.appTheme.greyText),
-                                                    isScrollable: false,
-                                                    indicatorSize: TabBarIndicatorSize.tab,
-                                                    indicator: materialIndicator(),
-                                                    tabs: dashboardCtrl.bottomNavLists.asMap().entries.map((e) {
-                                                      return Tab(
-                                                          icon: e.key == 3
-                                                              ? SizedBox(
-                                                                      height: Sizes
-                                                                          .s25,
-                                                                      width: Sizes
-                                                                          .s25,
-                                                                      child:
-                                                                          ClipRRect(
-                                                                              borderRadius: const BorderRadius.all(Radius.circular(AppRadius
-                                                                                  .r20)),
-                                                                              child: dashboardCtrl.data !=
-                                                                                      ""
-                                                                                  ? Image.network(dashboardCtrl.data!,
-                                                                                      fit: BoxFit
-                                                                                          .cover)
-                                                                                  : Text(
-                                                                                      appCtrl.user['name'][0],
-                                                                                      style: AppCss.manropeMedium14.textColor(appCtrl.appTheme.white),
-                                                                                    ).alignment(Alignment.center).paddingOnly(
-                                                                                      top:
-                                                                                          2)))
-                                                                  .paddingAll(
-                                                                      Insets.i1)
-                                                                  .decorated(
-                                                                      color: appCtrl
-                                                                          .appTheme
-                                                                          .primary,
-                                                                      shape:
-                                                                          BoxShape.circle)
-                                                              : SvgPicture.asset(dashboardCtrl.tabController?.index == e.key ? e.value["icon"] : e.value["icon2"]),
+                                                    height: Sizes.s70,
+                                                    child: TabBar(
+                                                        onTap: (val) {
+                                                          dashboardCtrl
+                                                              .tabController
+                                                              ?.index = val;
+                                                          dashboardCtrl
+                                                              .update();
+                                                        },
+                                                        controller: dashboardCtrl
+                                                            .tabController,
+                                                        labelColor: appCtrl
+                                                            .appTheme.primary,
+                                                        labelStyle: AppCss
+                                                            .manropeSemiBold12
+                                                            .textColor(appCtrl
+                                                                .appTheme
+                                                                .primary),
+                                                        unselectedLabelColor:
+                                                            appCtrl.appTheme
+                                                                .greyText,
+                                                        unselectedLabelStyle: AppCss
+                                                            .manropeSemiBold12
+                                                            .textColor(appCtrl
+                                                                .appTheme
+                                                                .greyText),
+                                                        isScrollable: false,
+                                                        indicatorSize:
+                                                            TabBarIndicatorSize
+                                                                .tab,
+                                                        indicator:
+                                                            materialIndicator(),
+                                                        tabs: dashboardCtrl
+                                                            .bottomNavLists
+                                                            .asMap()
+                                                            .entries
+                                                            .map((e) {
+                                                          return Tab(
+                                                            icon: e.key == 3
+                                                                ? SizedBox(
+                                                                        height: Sizes
+                                                                            .s25,
+                                                                        width: Sizes
+                                                                            .s25,
+                                                                        child: ClipRRect(
+                                                                            borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r20)),
+                                                                            child: dashboardCtrl.data != ""
+                                                                                ? Image.network(dashboardCtrl.data!, fit: BoxFit.cover)
+                                                                                : Text(
+                                                                                    appCtrl.user['name'][0],
+                                                                                    style: AppCss.manropeMedium14.textColor(appCtrl.appTheme.white),
+                                                                                  ).alignment(Alignment.center).paddingOnly(top: 2)))
+                                                                    .paddingAll(Insets.i1)
+                                                                    .decorated(color: appCtrl.appTheme.primary, shape: BoxShape.circle)
+                                                                : SvgPicture.asset(dashboardCtrl.tabController?.index == e.key ? e.value["icon"] : e.value["icon2"]),
+                                                                text: e.value['title'],
                                                           );
-                                                    }).toList()))
-                                            .decorated(color: appCtrl.appTheme.white, borderRadius: const BorderRadius.only(topLeft: Radius.circular(AppRadius.r8), topRight: Radius.circular(AppRadius.r8)))
-                                            .paddingOnly(top: Insets.i1)
-                                            .bottomNavDecoration(),
-                                        
-                                        
-                                        
-                                            Expanded(child: TabBarView(controller: dashboardCtrl.tabController, children: dashboardCtrl.pages)),
+                                                        }).toList()))
+                                                .decorated(
+                                                    color: appCtrl.appTheme.white,
+                                                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(AppRadius.r8), topRight: Radius.circular(AppRadius.r8)))
+                                                .paddingOnly(top: Insets.i1)
+                                                .bottomNavDecoration(),
+                                            Expanded(
+                                                child: TabBarView(
+                                                    controller: dashboardCtrl
+                                                        .tabController,
+                                                    children:
+                                                        dashboardCtrl.pages)),
                                           ],
                                         ),
                                       )),

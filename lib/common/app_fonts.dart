@@ -50,6 +50,7 @@ class AppFonts {
   String searchHere = "searchHere";
   String chats = "chats";
   String calls = "calls";
+  String voiceRoom = 'voice room';
   String setting = "setting";
   String profile = "profile";
   String recentUpdate = "recentUpdate";

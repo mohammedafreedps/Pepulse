@@ -37,7 +37,7 @@ class AppArray {
      },*/
      {
        "icon": eSvgAssets.call,
-       "title": appFonts.profile,
+       "title": appFonts.voiceRoom,
        "icon2": eSvgAssets.callOut
      },
          {
@@ -47,7 +47,7 @@ class AppArray {
      },
      {
       "icon": eSvgAssets.call,
-      "title" : appFonts.calls,
+      "title" : appFonts.profile,
       "icon2" : eSvgAssets.callOut
      }
    ];

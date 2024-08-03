@@ -14,6 +14,7 @@ class SvgAssets {
   final String message = "assets/svg/message.svg";
   final String arrowLeft = "assets/svg/arrowLeft.svg";
   final String add = "assets/svg/add.svg";
+  final String plus = "assets/svg/plus.svg";
   final String broadCast = "assets/svg/broadcast.svg";
   final String people = "assets/svg/people.svg";
   final String star = "assets/svg/star.svg";

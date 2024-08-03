@@ -9,37 +9,59 @@ class AudioRoomParticipenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AudioRoomController audioRoomController = Get.put(AudioRoomController());
+    final AudioRoomController audioRoomController =
+        Get.put(AudioRoomController());
     return PopScope(
       canPop: false,
       child: Scaffold(
-        appBar: audioRoomAppbar(audioRoomController),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text('Host',style: AppCss.manropeRegular13
-                      .textColor(appCtrl.appTheme.darkText),), 
-            ),
-            Expanded(child: participenceBuilder(true)),
-            Center(
-              child: Text('Audience',style: AppCss.manropeRegular13
-                      .textColor(appCtrl.appTheme.darkText),),
-            ),
-            Expanded(child: participenceBuilder(false)),
-            GetX<AudioRoomController>(
-              builder: (controller) {
-                return controller.isHost.value ?  IconButton(
-                  onPressed: () {
-                    audioRoomController.muteAudio();
-                  },
-                  icon: Icon(controller.muted.value ? Icons.mic_off : Icons.mic),
-                ) : Container() ;
-              }
-            ),
-            // Add other UI elements as needed
-          ],
-        )),
+          appBar: audioRoomAppbar(audioRoomController),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: Insets.i10),
+                child: Center(
+                  child: Row(
+                    children: [
+                      Text(
+                        'Hosts',
+                        style: AppCss.manropeRegular13
+                            .textColor(appCtrl.appTheme.darkText),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: participenceBuilder(true, context)),
+              Padding(
+                padding: const EdgeInsets.only(left: Insets.i10),
+                child: Center(
+                  child: Row(
+                    children: [
+                      Text(
+                        'Audience',
+                        style: AppCss.manropeRegular13
+                            .textColor(appCtrl.appTheme.darkText),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: participenceBuilder(false, context)),
+              GetX<AudioRoomController>(builder: (controller) {
+                return controller.isHost.value
+                    ? IconButton(
+                        onPressed: () {
+                          audioRoomController.muteAudio();
+                        },
+                        icon: Icon(
+                            controller.muted.value ? Icons.mic_off : Icons.mic),
+                      )
+                    : Container();
+              }),
+              // Add other UI elements as needed
+            ],
+          )),
     );
   }
 }
