@@ -36,14 +36,14 @@ class AppArray {
        "icon2": eSvgAssets.callOut
      },*/
      {
-       "icon": eSvgAssets.setting,
-       "title": appFonts.setting,
-       "icon2": eSvgAssets.settingOut
-     },
-     {
        "icon": eSvgAssets.call,
        "title": appFonts.profile,
        "icon2": eSvgAssets.callOut
+     },
+         {
+       "icon": eSvgAssets.setting,
+       "title": appFonts.setting,
+       "icon2": eSvgAssets.settingOut
      },
      {
       "icon": eSvgAssets.call,
@@ -51,7 +51,7 @@ class AppArray {
       "icon2" : eSvgAssets.callOut
      }
    ];
-
+ 
    var chatMenuList = [
      {
        "image": eSvgAssets.people,

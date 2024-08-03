@@ -68,11 +68,11 @@ class _DashboardState extends State<Dashboard>
                                 children: [
                                   Scaffold(
                                       floatingActionButton:
-                                          dashboardCtrl.tabController?.index ==
-                                                      0 ||
-                                                  dashboardCtrl.tabController
-                                                          ?.index ==
-                                                      1
+                                          dashboardCtrl.tabController?.index == 0
+                                                  //     0 ||
+                                                  // dashboardCtrl.tabController
+                                                  //         ?.index ==
+                                                  //     1
                                               ? FloatingActionButton(
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius: BorderRadius

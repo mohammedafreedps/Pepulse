@@ -195,8 +195,8 @@ class DashboardController extends GetxController
   final List<Widget> pages = [
     ChatScreen(),
   //  CallScreen(),
-    SettingScreen(),
     VoiceChatRoomScreen(),
+    SettingScreen(),
     ProfileScreen(),
   ];
 

@@ -1,5 +1,7 @@
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/app_pages_controllers/audio_room_controller.dart';
+import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/audio_room_appbar.dart';
+import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/participence_builder.dart';
 import 'package:flutter/cupertino.dart';
 
 class AudioRoomParticipenceScreen extends StatelessWidget {
@@ -7,25 +9,35 @@ class AudioRoomParticipenceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AudioRoomController myController = Get.put(AudioRoomController());
-    return Scaffold(
-      body: Center(
-        child: Column(
+    final AudioRoomController audioRoomController = Get.put(AudioRoomController());
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: audioRoomAppbar(audioRoomController),
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Center(
+              child: Text('Host'),
+            ),
+            Expanded(child: participenceBuilder(true)),
+            const Center(
+              child: Text('Audience'),
+            ),
+            Expanded(child: participenceBuilder(false)),
             GetX<AudioRoomController>(
               builder: (controller) {
-                return IconButton(
+                return controller.isHost.value ?  IconButton(
                   onPressed: () {
-                    myController.muteAudio();
+                    audioRoomController.muteAudio();
                   },
                   icon: Icon(controller.muted.value ? Icons.mic_off : Icons.mic),
-                );
+                ) : Container() ;
               }
             ),
             // Add other UI elements as needed
           ],
-        ),
-    ));
+        )),
+    );
   }
 }

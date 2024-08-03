@@ -33,6 +33,7 @@ class VoiceChatRoomScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
+                                audioRoomController.populateParticipence();
                                 audioRoomController.initializeAgora(
                                     isBroadcaster: false);
                                     Get.to(AudioRoomParticipenceScreen());

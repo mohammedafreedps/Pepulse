@@ -5,7 +5,6 @@ class CallerDetailModel {
   final String name;
   final bool isHostor;
   final String channelId;
-  final List? participence;
   final String phoneNumber;
 
   CallerDetailModel(
@@ -13,8 +12,17 @@ class CallerDetailModel {
       required this.name,
       required this.isHostor,
       required this.channelId,
-      this.participence,
       required this.phoneNumber});
+
+  Map<String, dynamic> toMap(){
+    return{
+      'id' : id,
+      'name' : name,
+      'isHostor' : isHostor,
+      'channelId' : channelId,
+      'phoneNumber' : phoneNumber
+    };
+  }
 
   factory CallerDetailModel.fromDocumentSnapshot(DocumentSnapshot doc) {
     return CallerDetailModel(
@@ -22,7 +30,6 @@ class CallerDetailModel {
         name: doc['name'],
         isHostor: doc['isHoster'],
         channelId: doc['channelId'],
-        participence: doc['participence'],
         phoneNumber: doc['phone']);
   }
 }
