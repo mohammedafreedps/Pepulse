@@ -19,6 +19,6 @@ Widget hostCallFloatingButton({required VoiceChatRoomController controller,requi
       child: SvgPicture.asset(
         width: Sizes.s35,
         eSvgAssets.plus,
-        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        colorFilter:  ColorFilter.mode(appCtrl.appTheme.white, BlendMode.srcIn),
       ));
 }

@@ -6,11 +6,11 @@ Widget totalParticipensIndicator(){
     builder: (controller) {
       return Container(
         padding: const EdgeInsets.all(2),
-        decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: appCtrl.appTheme.bg,borderRadius:  BorderRadius.circular(10)),
         child: Center(child: Row(
           children: [
-            const Icon(Icons.person,color: Colors.white,),
-            Text(controller.activeParticipence.length.toString() ,style: TextStyle(color: Colors.white),),
+            Icon(Icons.person,color: appCtrl.appTheme.white,),
+            Text(controller.activeParticipence.length.toString() ,style: TextStyle(color: appCtrl.appTheme.white),),
           ],
         )),
       );

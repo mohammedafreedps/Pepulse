@@ -8,11 +8,16 @@ Widget participenceBuilder(bool isHost,BuildContext context) {
       return Padding(
         padding: const EdgeInsets.only(top: Insets.i10),
         child: GridView.builder(
-          itemCount: controller.hostAsParticipence.length,
+          itemCount: (10 - controller.hostAsParticipence.length),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             itemBuilder: (context, index){
-              return  audioRoomTiles(controller.hostAsParticipence[index].name,false);
+              if(index < controller.hostAsParticipence.length){
+                return  audioRoomTiles(name: controller.hostAsParticipence[index].name,false,false);
+              }
+              else{
+                return audioRoomTiles(false,true);
+              }
             }),
       );
     }
@@ -23,9 +28,9 @@ Widget participenceBuilder(bool isHost,BuildContext context) {
         child: GridView.builder(
           itemCount: controller.audianceAsParticipence.length,
             gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             itemBuilder: (context, index){
-              return  audioRoomTiles(controller.audianceAsParticipence[index].name,true);
+              return  audioRoomTiles(name: controller.audianceAsParticipence[index].name,true,false);
             }),
       );
     }
