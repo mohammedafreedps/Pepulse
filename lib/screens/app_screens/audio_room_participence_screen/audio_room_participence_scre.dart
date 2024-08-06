@@ -1,12 +1,33 @@
+import 'dart:async';
+
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/app_pages_controllers/audio_room_controller.dart';
 import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/audio_room_appbar.dart';
 import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/participence_builder.dart';
+import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/show_room_detail_enter_sheet.dart';
 import 'package:flutter/cupertino.dart';
 
-class AudioRoomParticipenceScreen extends StatelessWidget {
+class AudioRoomParticipenceScreen extends StatefulWidget {
   const AudioRoomParticipenceScreen({super.key});
 
+  @override
+  State<AudioRoomParticipenceScreen> createState() =>
+      _AudioRoomParticipenceScreenState();
+}
+
+class _AudioRoomParticipenceScreenState
+    extends State<AudioRoomParticipenceScreen> {
+
+   @override
+  void initState() {
+    Timer(Duration(seconds: 1), (){
+      _callBottom();
+    });
+    super.initState();
+  }
+  void _callBottom(){
+    showRoomDetailEnterSheet(context);
+  }
   @override
   Widget build(BuildContext context) {
     final AudioRoomController audioRoomController =
@@ -59,7 +80,6 @@ class AudioRoomParticipenceScreen extends StatelessWidget {
                       )
                     : Container();
               }),
-              // Add other UI elements as needed
             ],
           )),
     );

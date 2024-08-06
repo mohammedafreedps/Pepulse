@@ -9,6 +9,7 @@ PreferredSizeWidget audioRoomAppbar(AudioRoomController audioRoomController){
     automaticallyImplyLeading: false,
           actions: [
             ElevatedButton(onPressed: (){
+              audioRoomController.clearRoom();
                 voiceChatRoomController.playLeaveAudio();
                 audioRoomController.leaveRoom();
                 HapticFeedback.heavyImpact();

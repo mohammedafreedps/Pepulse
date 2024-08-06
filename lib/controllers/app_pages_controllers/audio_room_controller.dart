@@ -4,6 +4,7 @@ import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/bottom_controllers/voice_chat_room_controller.dart';
 import 'package:chatzy/models/caller_detail_model.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class AudioRoomController extends GetxController {
@@ -11,7 +12,7 @@ class AudioRoomController extends GetxController {
       Get.find<VoiceChatRoomController>();
   String _appId = '72c65e66c01443debda4413af7feabea';
   String _token =
-      '007eJxTYIjU5KvTOBMT/jU4QXOR0b1skxNKugpfGEUsxa5UZFetYVRgMDdKNjNNNTNLNjA0MTFOSU1KSTQxMTROTDNPS01MSk1k2rg2rSGQkYFV9A0jIwMEgvjsDCWpxSWZeekMDACXGR10';
+      '007eJxTYJANU94vefRJIv+t/vktc+2XVt9TbHsvduSGLfcznfr9f+4rMJgbJZuZppqZJRsYmpgYp6QmpSSamBgaJ6aZp6UmJqUmLjPZlNYQyMigIrWImZEBAkF8doaS1OKSzLx0BgYA+koh4A==';
 
   RxBool muted = false.obs;
   RxBool isHost = false.obs;
@@ -22,6 +23,12 @@ class AudioRoomController extends GetxController {
   RxBool isHaveAccessToAddHost = false.obs;
 
   Timer? _timerForChatRoom;
+
+  //reference for accessing realtime database
+  DatabaseReference realTimeDatabaseReference = FirebaseDatabase.instance.ref().child('Rooms');
+
+  //current user info
+  final User? _currentUser = FirebaseAuth.instance.currentUser;
 
   void endTimerForChatRoom(){
     if(_timerForChatRoom != null){
@@ -140,5 +147,27 @@ class AudioRoomController extends GetxController {
 
   void makeToHost(int index){
     
+  }
+  void createRoom() async {
+  print('enr functin =-=--=-');
+  if (_currentUser != null) {
+    print('running functin =-=--=-');
+    try {
+      realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).set({
+        'profile' : '',
+        'channelId': 'testing',
+        'roomName' : 'testing ${_currentUser!.phoneNumber.toString()}',
+        'description' : ''
+      });
+      print('created succuss =-=-==-=-=-=-=');
+    } catch (error) {
+      print('Error adding data: $error');
+    }
+  }
+}
+  void clearRoom(){
+    if(_currentUser != null){
+      realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).remove();
+    }
   }
 }
