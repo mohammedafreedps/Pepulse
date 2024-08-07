@@ -158,7 +158,10 @@ class AudioRoomController extends GetxController {
         'profile' : '',
         'channelId': 'testing',
         'roomName' : 'testing ${_currentUser!.phoneNumber.toString()}',
-        'description' : ''
+        'description' : '',
+        'isSeatLocked' : [false,false,false,false,false,false,false,false,false,false,],
+        'seatedAt' : 0,
+        'audience' : []
       });
       print('created succuss =-=-==-=-=-=-=');
     } catch (error) {

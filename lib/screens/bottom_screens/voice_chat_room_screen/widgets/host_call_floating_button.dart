@@ -9,10 +9,10 @@ Widget hostCallFloatingButton({required VoiceChatRoomController controller,requi
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
       backgroundColor: appCtrl.appTheme.primary,
       onPressed: () {
-        controller2.initializeAgora(isBroadcaster: true);
-        controller.becomeHoster(isHoster: true);
+        // controller2.initializeAgora(isBroadcaster: true);
+        // controller.becomeHoster(isHoster: true);
         controller.playJoinAudio();
-        HapticFeedback.mediumImpact();
+        // HapticFeedback.mediumImpact();
         controller2.createRoom();
         Get.to(AudioRoomParticipenceScreen());
       },

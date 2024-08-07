@@ -13,7 +13,11 @@ class RoomDetailController extends GetxController {
   RxString channelName = ''.obs;
 
   TextEditingController descriptionController = TextEditingController();
-  RxString remainingTextCount = '400'.obs;
+
+  RxList<bool> lockedSeates = <bool>[].obs;
+  RxList<String> audienceNumber = <String>[].obs;
+  RxInt hostSeatedAt = 0.obs;
+  List<bool> holdLockBool = [];
 
   void getChannelName() async {
     try {
@@ -21,13 +25,12 @@ class RoomDetailController extends GetxController {
           .child(_currentUser!.phoneNumber.toString())
           .get();
       if (snapShot.exists) {
-        print(snapShot.value.toString() + '=-=-=-=---=-==-=-=-=-');
         final data = snapShot.value as Map<dynamic, dynamic>;
         channelName.value = data['roomName'];
-        print(channelName.value + '=-=-=-=--=-=--=-');
         roomNameController.text = channelName.value;
       }
-    } catch (e) {}
+    }on FirebaseAuthException catch (e) {
+    }
   }
 
   void setRoomDetail() {
@@ -39,28 +42,58 @@ class RoomDetailController extends GetxController {
       }
     } catch (e) {}
   }
-  void setRoomDescription(){
+
+  void setRoomDescription() {
     try {
-      if(descriptionController.text.isNotEmpty){
-        _databaseReference.child(_currentUser!.phoneNumber.toString()).update({
-          'description' :descriptionController.text
-        });
+      if (descriptionController.text.isNotEmpty) {
+        _databaseReference
+            .child(_currentUser!.phoneNumber.toString())
+            .update({'description': descriptionController.text});
       }
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   }
 
-  //Description page section start
-  void updateWordCount(){
-    int _maxWord = 400;
-    if(descriptionController.text.isNotEmpty){
-      int _words = descriptionController.text.length;
-      int _remining = _maxWord - _words;
-      remainingTextCount.value = _remining.toString();
-    }else{
-      remainingTextCount.value = _maxWord.toString();
-    }
-    //Descriiption page section end
+  void getSeatLocked() {
+  if (_currentUser != null) {
+    _databaseReference
+        .child(_currentUser!.phoneNumber.toString())
+        .onValue
+        .listen((event) {
+          try {
+            final data = event.snapshot.value as Map<dynamic, dynamic>;
+            hostSeatedAt.value = data['seatedAt'] as int;
+            if(data['audience'] != null){
+              audienceNumber.value = List<String>.from(data['audience']);
+            } 
+            if (data['isSeatLocked'] != null) {
+                lockedSeates.value = List<bool>.from(data['isSeatLocked']);
+            } else {
+            }
+          } catch (error) {
+          }
+        });
   }
+}
+
+  void lockSeatAt(int index, bool value){
+    final ref = _databaseReference.child(_currentUser!.phoneNumber.toString()).child('isSeatLocked/$index');
+    ref.set(value);
+  }
+  void hostsSeatedAt(int seatedIndex){
+    final ref = _databaseReference.child(_currentUser!.phoneNumber.toString()).child('seatedAt');
+    ref.set(seatedIndex);
+  }
+  // void addHostToAudiance()async{
+  //   final DatabaseReference listRef = _databaseReference.child(_currentUser!.phoneNumber.toString()).child('audience');
+  //   listRef.once().then((snapShot){
+  //     if(snapShot.snapshot.exists){
+  //       final existingArray = snapShot.snapshot.value as List<dynamic>;
+  //       existingArray.add(_currentUser!.phoneNumber.toString());
+  //       listRef.set(existingArray);
+  //     }else{
+  //       listRef.set([_currentUser!.phoneNumber.toString()]);
+  //     }
+  //   });
+  // }
+
 }
