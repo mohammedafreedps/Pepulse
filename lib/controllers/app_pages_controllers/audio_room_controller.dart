@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:chatzy/config.dart';
+import 'package:chatzy/controllers/app_pages_controllers/room_detail_controller.dart';
 import 'package:chatzy/controllers/bottom_controllers/voice_chat_room_controller.dart';
 import 'package:chatzy/models/caller_detail_model.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -166,7 +167,10 @@ class AudioRoomController extends GetxController {
   }
 }
   void clearRoom(){
+    RoomDetailController _roomDetailController = Get.find();
     if(_currentUser != null){
+      _roomDetailController.descriptionController.clear();
+      _roomDetailController.roomNameController.clear();
       realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).remove();
     }
   }
