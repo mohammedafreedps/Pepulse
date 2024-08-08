@@ -5,7 +5,9 @@ Widget rooms() {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text('My Room', style: AppCss.manropeBold20),
-      SizedBox(height: Insets.i30,),
+      SizedBox(
+        height: Insets.i30,
+      ),
       SizedBox(
         height: Sizes.s100,
         child: ListView.builder(
@@ -31,7 +33,7 @@ List<Widget> roomLists = [
   roomListTile(true),
   roomListTile(true),
   roomListTile(true),
-  ];
+];
 
 Widget roomListTile(bool isDummy) {
   if (isDummy) {
@@ -42,6 +44,12 @@ Widget roomListTile(bool isDummy) {
         decoration: BoxDecoration(
             color: appCtrl.appTheme.black,
             borderRadius: BorderRadius.circular(Insets.i10)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(Insets.i10),
+            child: Image.asset(
+          'assets/images/dbg1.png',
+          fit: BoxFit.cover,
+        )),
       ),
     );
   } else {
@@ -52,7 +60,12 @@ Widget roomListTile(bool isDummy) {
         decoration: BoxDecoration(
             color: appCtrl.appTheme.black,
             borderRadius: BorderRadius.circular(Insets.i10)),
-            child: Center(child: Icon(Icons.add,color: appCtrl.appTheme.white,),),
+        child: Center(
+          child: Icon(
+            Icons.add,
+            color: appCtrl.appTheme.white,
+          ),
+        ),
       ),
     );
   }

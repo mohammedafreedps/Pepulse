@@ -85,10 +85,10 @@ class VoiceRoomCustomize extends StatelessWidget {
                               voiceRoomCustomizeController
                                   .toggleShowLinkEnterSection();
                             },
-                            child: cusTile(lable: roomSettings[index]),
+                            child: cusTile(lable: roomSettings[index],imagepath: 'assets/images/dbg3.png',icon: roomSettingIcon[index]),
                           );
                         }
-                        return cusTile(lable: roomSettings[index]);
+                        return cusTile(lable: roomSettings[index],icon: roomSettingIcon[index]);
                       }),
                 ),
                 GetX<VoiceRoomCustomizeController>(builder: (controller) {
@@ -133,14 +133,17 @@ class VoiceRoomCustomize extends StatelessWidget {
   }
 }
 
-Widget cusTile({String lable = 'Data'}) {
+Widget cusTile({String lable = 'Data',String imagepath = 'assets/images/dbg3.png',IconData? icon}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: Insets.i10),
     child: Column(
       children: [
         CircleAvatar(
+          backgroundImage: icon !=null ? null: AssetImage(imagepath),
           radius: AppRadius.r30,
-          backgroundColor: appCtrl.appTheme.black,
+          child: Center(
+            child: icon !=null ? Icon(icon): SizedBox(),
+          ),
         ),
         SizedBox(
           height: Sizes.s5,
@@ -168,4 +171,11 @@ List<String> roomSettings = [
   'Announcement',
   'Swich Mode',
   'Lock Mik',
+];
+List<IconData> roomSettingIcon = [
+  Icons.video_camera_back_rounded,
+  Icons.shopping_cart,
+  Icons.announcement,
+  Icons.panorama_photosphere,
+  Icons.lock
 ];

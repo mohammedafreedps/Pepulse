@@ -82,13 +82,16 @@ class _AudioRoomParticipenceScreenState
                       if (controller.showYtVideoScreen.value && voiceRoomCustomizeController.ytController!= null) {
                         return Column(
                           children: [
-                            YoutubePlayer(
-                              controller:
-                                  voiceRoomCustomizeController.ytController!,
-                              showVideoProgressIndicator: true,
-                              onReady: (){
-                                print('redey to play video-==-=-=-=-=-=-=-==-');
-                              },
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(AppRadius.r10),
+                              child: YoutubePlayer(
+                                controller:
+                                    voiceRoomCustomizeController.ytController!,
+                                showVideoProgressIndicator: true,
+                                onReady: (){
+                                  print('redey to play video-==-=-=-=-=-=-=-==-');
+                                },
+                              ),
                             ),
                             SizedBox(height: Insets.i10,),
                             ElevatedButton(

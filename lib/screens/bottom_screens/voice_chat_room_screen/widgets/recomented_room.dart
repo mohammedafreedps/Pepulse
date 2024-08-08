@@ -34,17 +34,17 @@ Widget recomentedRoom() {
 }
 
 List<Widget> _recommentedRoomList = [
-  _categoryTile('Trending'),
-  _categoryTile('New'),
-  _categoryTile('Old'),
-  _categoryTile('Upcomming'),
-  _categoryTile('Cars'),
-  _categoryTile('Photography'),
-  _categoryTile('3d'),
-  _categoryTile('Social'),
+  _categoryTile('Trending',Icons.trending_up_rounded),
+  _categoryTile('New',Icons.label),
+  _categoryTile('Old',Icons.grid_goldenratio_outlined),
+  _categoryTile('Upcomming',Icons.upcoming),
+  _categoryTile('Cars',Icons.car_repair),
+  _categoryTile('Photography',Icons.camera_alt),
+  _categoryTile('3d',Icons.looks_3_rounded),
+  _categoryTile('Social',Icons.social_distance),
 ];
 
-Widget _categoryTile(String text) {
+Widget _categoryTile(String text,IconData icon) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: Insets.i5),
     child: Container(
@@ -60,8 +60,13 @@ Widget _categoryTile(String text) {
           ],
           color: appCtrl.appTheme.white,
           borderRadius: BorderRadius.circular(Insets.i20)),
-      child: Center(
-        child: Text(text),
+      child: Row(
+        children: [
+          Icon(icon),
+          Center(
+            child: Text(text),
+          ),
+        ],
       ),
     ),
   );
@@ -98,7 +103,7 @@ Widget _recommentedRoomTile(String name, String description, int count) {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(children: [_avatharCircular(isBig: false),SizedBox(width: Insets.i10,), Text(name,style: AppCss.manropeBold18,)]),
-              _categoryTile(count.toString())
+              _categoryTile(count.toString(),Icons.person)
             ],
           ),
           SizedBox(height: Sizes.s15,),
@@ -119,6 +124,7 @@ Widget _recommentedRoomTile(String name, String description, int count) {
 
 Widget _avatharCircular({bool isBig = true}) {
   return CircleAvatar(
+    backgroundImage: AssetImage('assets/images/dbg2.png'),
     radius: isBig ? AppRadius.r30 : AppRadius.r20,
     backgroundColor: appCtrl.appTheme.sameBlack,
   );
