@@ -21,7 +21,7 @@ Widget rooms() {
 }
 
 List<Widget> roomLists = [
-  roomListTile(false),
+  roomListTile(true),
   roomListTile(true),
   roomListTile(true),
   roomListTile(true),

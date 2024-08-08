@@ -101,6 +101,7 @@ dependencies:
   simple_app_cache_manager: ^0.0.4
   contacts_service: ^0.6.3
   firebase_database: ^10.5.7
+  youtube_player_flutter: ^9.0.2
 
 
 dependency_overrides:

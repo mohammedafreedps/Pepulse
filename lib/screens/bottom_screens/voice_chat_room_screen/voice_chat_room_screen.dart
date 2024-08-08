@@ -8,6 +8,7 @@ import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/rec
 import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/rooms.dart';
 import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/top_bar.dart';
 import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/voice_chat_tile.dart';
+import 'package:chatzy/screens/bottom_screens/voice_chat_room_screen/widgets/voice_room_appbar.dart';
 import 'package:flutter/cupertino.dart';
 
 class VoiceChatRoomScreen extends StatelessWidget {
@@ -21,6 +22,7 @@ class VoiceChatRoomScreen extends StatelessWidget {
     final AudioRoomController audioRoomController =
         Get.put(AudioRoomController());
     return Scaffold(
+      appBar: voiceRoomAppbar(),
         backgroundColor: appCtrl.isTheme
             ? appCtrl.appTheme.screenBG
             : appCtrl.appTheme.white,
@@ -28,8 +30,7 @@ class VoiceChatRoomScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              topBar(),
-              SizedBox(height: Insets.i50,),
+              SizedBox(height: Insets.i20,),
               rooms(),
               SizedBox(height: Insets.i50,),
               Expanded(child: recomentedRoom()),

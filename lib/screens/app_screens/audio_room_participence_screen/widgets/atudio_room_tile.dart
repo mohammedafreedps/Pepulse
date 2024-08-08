@@ -24,7 +24,7 @@ Widget audioRoomTiles(int index, bool isAudiance, bool isLocked, String label,
           value: 'inviteSpeaker',
         ),
         PopupMenuItem(
-          child: Text('Lock Mic'),
+          child: Text('Unlock Mic'),
           value: 'lockMic',
         ),
       ],

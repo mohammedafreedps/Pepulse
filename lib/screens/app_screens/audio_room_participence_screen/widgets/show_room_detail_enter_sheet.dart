@@ -129,6 +129,7 @@ Widget roomDetialApplyButton() {
   return InkWell(
     onTap: () {
       _roomDetailController.setRoomDetail();
+      _roomDetailController.getChannelName();
       Get.back();
     },
     child: Container(

@@ -136,7 +136,6 @@ class AudioRoomController extends GetxController {
   }
 
   void populateParticipence() async {
-    User? _user = FirebaseAuth.instance.currentUser;
     final QuerySnapshot querySnapshot2 =
         await FirebaseFirestore.instance.collection('users').where('channelId', isEqualTo: 'testing').get();
     allParticipence.value = querySnapshot2.docs
@@ -161,7 +160,12 @@ class AudioRoomController extends GetxController {
         'description' : '',
         'isSeatLocked' : [false,false,false,false,false,false,false,false,false,false,],
         'seatedAt' : 0,
-        'audience' : []
+        'audience' : [],
+      });
+      realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).child('YtVideoPlayer').set({
+        'isPlaying' : false,
+        'showVideo' : false,
+        'videoLinke' : ''
       });
       print('created succuss =-=-==-=-=-=-=');
     } catch (error) {
