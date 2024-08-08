@@ -96,6 +96,7 @@ Widget audioRoomTiles(int index, bool isAudiance, bool isLocked, String label,
           const CircleAvatar(
             radius: Insets.i30,
             backgroundColor: Colors.black,
+            backgroundImage: AssetImage('assets/images/dbg6.png'),
           ),
           Text(
             name!,

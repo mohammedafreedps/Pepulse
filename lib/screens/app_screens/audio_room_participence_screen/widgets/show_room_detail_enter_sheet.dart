@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:chatzy/common/assets/image_assets.dart';
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/app_pages_controllers/audio_room_controller.dart';
 import 'package:chatzy/controllers/app_pages_controllers/room_detail_controller.dart';
@@ -32,29 +35,47 @@ Future showRoomDetailEnterSheet(BuildContext context) {
 }
 
 Widget addProfile() {
-  return Container(
-    width: Sizes.s70,
-    height: Sizes.s70,
-    decoration: BoxDecoration(
-        color: appCtrl.appTheme.black,
-        borderRadius: BorderRadius.circular(Insets.i10)),
-    child: Stack(
-      children: [
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            width: double.infinity,
-            height: Sizes.s30,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [Icon(Icons.camera), Text('Edit')],
+  RoomDetailController roomDetailController = Get.find();
+  return InkWell(
+    onTap: (){
+      roomDetailController.picImage();
+    },
+    child: Container(
+      width: Sizes.s70,
+      height: Sizes.s70,
+      decoration: BoxDecoration(
+          color: appCtrl.appTheme.black,
+          borderRadius: BorderRadius.circular(Insets.i10)),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: GetX<RoomDetailController>(
+              builder: (controller) {
+                if(controller.pickedImagePathLocal.value.isNotEmpty){
+                  return Image.file(File(controller.pickedImagePathLocal.value),fit: BoxFit.cover,);
+                }else{
+                  return SizedBox();
+                };
+              }
             ),
           ),
-        )
-      ],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              height: Sizes.s30,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [Icon(Icons.camera), Text('Edit')],
+              ),
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
@@ -130,6 +151,7 @@ Widget roomDetialApplyButton() {
     onTap: () {
       _roomDetailController.setRoomDetail();
       _roomDetailController.getChannelName();
+      _roomDetailController.uploadRoomProfile();
       Get.back();
     },
     child: Container(

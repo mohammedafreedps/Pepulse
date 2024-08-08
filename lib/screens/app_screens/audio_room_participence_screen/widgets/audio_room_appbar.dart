@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/app_pages_controllers/audio_room_controller.dart';
 import 'package:chatzy/controllers/app_pages_controllers/room_detail_controller.dart';
@@ -12,8 +14,13 @@ PreferredSizeWidget audioRoomAppbar(AudioRoomController audioRoomController) {
   VoiceRoomCustomizeController voiceRoomCustomizeController =
       Get.find<VoiceRoomCustomizeController>();
   return AppBar(
-    leading: CircleAvatar(
-      backgroundColor: appCtrl.appTheme.black,
+    leading: GetX<RoomDetailController>(
+      builder: (controller) {
+        return CircleAvatar(
+          backgroundColor: appCtrl.appTheme.indicator,
+          backgroundImage: FileImage(File(controller.pickedImagePathLocal.value)),
+        );
+      }
     ),
     title: GetX<RoomDetailController>(builder: (controller) {
       return Column(
@@ -41,7 +48,7 @@ PreferredSizeWidget audioRoomAppbar(AudioRoomController audioRoomController) {
             audioRoomController.clearRoom();
             voiceChatRoomController.playLeaveAudio();
             voiceRoomCustomizeController.disposeYtController();
-            // audioRoomController.leaveRoom();
+            audioRoomController.leaveRoom();
             HapticFeedback.heavyImpact();
             Get.back();
           },

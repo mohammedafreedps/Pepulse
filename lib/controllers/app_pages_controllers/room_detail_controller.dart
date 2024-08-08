@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:chatzy/config.dart';
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/common_controllers/notification_controller.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RoomDetailController extends GetxController {
   User? _currentUser = FirebaseAuth.instance.currentUser;
@@ -11,6 +14,7 @@ class RoomDetailController extends GetxController {
       FirebaseDatabase.instance.ref('Rooms');
   TextEditingController roomNameController = TextEditingController();
   RxString channelName = ''.obs;
+  RxString pickedImagePathLocal = ''.obs;
 
   TextEditingController descriptionController = TextEditingController();
 
@@ -18,6 +22,8 @@ class RoomDetailController extends GetxController {
   RxList<String> audienceNumber = <String>[].obs;
   RxInt hostSeatedAt = 0.obs;
   List<bool> holdLockBool = [];
+
+  final ImagePicker _picker = ImagePicker();
 
   void getChannelName() async {
     print('get Channel Name fuin');
@@ -98,5 +104,34 @@ class RoomDetailController extends GetxController {
   //     }
   //   });
   // }
+
+  void picImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if(pickedFile != null){
+      pickedImagePathLocal.value = pickedFile.path;
+    }
+  }
+
+  void uploadRoomProfile()async{
+    print('engerd ');
+    if(pickedImagePathLocal.value.isEmpty) return;
+    print('not emply pathh give');
+
+    try {
+      final storageRef = await FirebaseStorage.instance.ref().child(DateTime.now().toString());
+      await storageRef.putFile(File(pickedImagePathLocal.value));
+
+      final url = await storageRef.getDownloadURL();
+
+      print(url + '==-=-=-=-=-=-=-=-=-=-=-=-');
+
+      _databaseReference.child(_currentUser!.phoneNumber.toString()).update({
+        'profile' : url
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
 }

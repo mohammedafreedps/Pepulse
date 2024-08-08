@@ -107,18 +107,6 @@ class _AudioRoomParticipenceScreenState
                             child: participenceBuilder(false, context));
                       }
                     }),
-                    GetX<AudioRoomController>(builder: (controller) {
-                      return controller.isHost.value
-                          ? IconButton(
-                              onPressed: () {
-                                audioRoomController.muteAudio();
-                              },
-                              icon: Icon(controller.muted.value
-                                  ? Icons.mic_off
-                                  : Icons.mic),
-                            )
-                          : Container();
-                    }),
                     voiceBottomBar(),
                   ],
                 ),
