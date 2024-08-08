@@ -79,7 +79,7 @@ class _AudioRoomParticipenceScreenState
                       ),
                     ),
                     GetX<VoiceRoomCustomizeController>(builder: (controller) {
-                      if (controller.showYtVideoScreen.value) {
+                      if (controller.showYtVideoScreen.value && voiceRoomCustomizeController.ytController!= null) {
                         return Column(
                           children: [
                             YoutubePlayer(

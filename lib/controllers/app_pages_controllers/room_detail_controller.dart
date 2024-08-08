@@ -20,6 +20,8 @@ class RoomDetailController extends GetxController {
   List<bool> holdLockBool = [];
 
   void getChannelName() async {
+    print('get Channel Name fuin');
+    await Future.delayed(Duration(seconds: 1));
     try {
       final snapShot = await _databaseReference
           .child(_currentUser!.phoneNumber.toString())
@@ -27,6 +29,7 @@ class RoomDetailController extends GetxController {
       if (snapShot.exists) {
         final data = snapShot.value as Map<dynamic, dynamic>;
         channelName.value = data['roomName'];
+        print('channelname -=-' + channelName.value);
         roomNameController.text = channelName.value;
       }
     }on FirebaseAuthException catch (e) {

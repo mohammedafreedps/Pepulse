@@ -162,7 +162,8 @@ class AudioRoomController extends GetxController {
         'seatedAt' : 0,
         'audience' : [],
       });
-      realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).child('YtVideoPlayer').set({
+      await Future.delayed(Duration(seconds: 2));
+      realTimeDatabaseReference.child(_currentUser!.phoneNumber.toString()).child('YtVideoPlayer').update({
         'isPlaying' : false,
         'showVideo' : false,
         'videoLinke' : ''

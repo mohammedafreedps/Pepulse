@@ -23,50 +23,53 @@ class VoiceRoomCustomizeController extends GetxController {
 
   @override
   void onInit() {
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: 3), () {
       listenToPlayerSetup();
     });
     super.onInit();
   }
 
   void listenToPlayerSetup() {
-    print('Listening function called -=-=-=-');
-    if (_currentUser != null) {
-      _listenerSubscription = _databaseReference
-          .child(_currentUser!.phoneNumber.toString())
-          .child('YtVideoPlayer')
-          .onValue
-          .listen((event) {
-        final data = event.snapshot.value as Map<dynamic, dynamic>;
-        isPlaying.value = data['isPlaying'];
-        showYtVideoScreen.value = data['showVideo'];
-        videoLink.value = data['videoLinke'];
-        if (videoLink.value.isNotEmpty) {
-          if (!funCalled) {
-            initializeYoutubeVideoController();
+    try {
+      if (_currentUser != null) {
+        _listenerSubscription = _databaseReference
+            .child(_currentUser!.phoneNumber.toString())
+            .child('YtVideoPlayer')
+            .onValue
+            .listen((event) {
+          final data = event.snapshot.value as Map<dynamic, dynamic>;
+          isPlaying.value = data['isPlaying'];
+          showYtVideoScreen.value = data['showVideo'];
+          videoLink.value = data['videoLinke'];
+          if (videoLink.value.isNotEmpty) {
+            if (!funCalled) {
+              initializeYoutubeVideoController();
+            }
+            funCalled = true;
           }
-          funCalled = true;
-        }
-        if (ytController != null) {
-          if (isPlaying.value && showYtVideoScreen.value) {
-            ytController!.play();
-          } else if (!isPlaying.value && showYtVideoScreen.value) {
-            ytController!.pause();
+          if (ytController != null) {
+            if (isPlaying.value && showYtVideoScreen.value) {
+              ytController!.play();
+            } else if (!isPlaying.value && showYtVideoScreen.value) {
+              ytController!.pause();
+            }
           }
-        }
-      });
+        });
+      }
+    }on FirebaseAuthException catch (e) {
+      rethrow;
     }
   }
 
   void setVideoUrl() {
     if (videoLinkController.text.isNotEmpty) {
       _databaseReference
-        .child(_currentUser!.phoneNumber.toString())
-        .child('YtVideoPlayer')
-        .update({
-          'videoLinke': videoLinkController.text,
-          'showVideo': !showYtVideoScreen.value,
-        });
+          .child(_currentUser!.phoneNumber.toString())
+          .child('YtVideoPlayer')
+          .update({
+        'videoLinke': videoLinkController.text,
+        'showVideo': !showYtVideoScreen.value,
+      });
     }
     videoLinkController.clear();
   }
@@ -88,25 +91,25 @@ class VoiceRoomCustomizeController extends GetxController {
   void playPauseVideo() {
     if (_currentUser != null) {
       _databaseReference
-        .child(_currentUser!.phoneNumber.toString())
-        .child('YtVideoPlayer')
-        .update({'isPlaying': !isPlaying.value});
+          .child(_currentUser!.phoneNumber.toString())
+          .child('YtVideoPlayer')
+          .update({'isPlaying': !isPlaying.value});
     }
   }
 
   void closeYtVideo() {
     if (_currentUser != null) {
       _databaseReference
-        .child(_currentUser!.phoneNumber.toString())
-        .child('YtVideoPlayer')
-        .update({
-          'isPlaying': false,
-          'showVideo': false,
-          'videoLinke': '',
-        });
+          .child(_currentUser!.phoneNumber.toString())
+          .child('YtVideoPlayer')
+          .update({
+        'isPlaying': false,
+        'showVideo': false,
+        'videoLinke': '',
+      });
     }
     ytController?.dispose();
-    ytController = null; 
+    ytController = null;
     funCalled = false;
   }
 
@@ -119,8 +122,9 @@ class VoiceRoomCustomizeController extends GetxController {
   void disposeYtController() {
     funCalled = false;
     ytController?.dispose();
-    ytController = null; 
+    ytController = null;
     _listenerSubscription?.cancel();
+    _listenerSubscription = null;
   }
 
   void toggleShowLinkEnterSection() {
