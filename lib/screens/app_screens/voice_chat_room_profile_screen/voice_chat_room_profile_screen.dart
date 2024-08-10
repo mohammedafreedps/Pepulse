@@ -146,8 +146,9 @@ Widget taskCenter(BuildContext context) {
                   Row(
                     children: [
                       Icon(
-                        Icons.today,
+                        Icons.event_available_sharp,
                         size: Sizes.s30,
+                        color: appCtrl.appTheme.secondary,
                       ),
                       ShaderMask(
                         blendMode: BlendMode.srcIn,
@@ -221,7 +222,7 @@ Widget fiveOptions(BuildContext context) {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.diamond),
+                      Icon(Icons.stream_sharp),
                       SizedBox(
                         width: Sizes.s10,
                       ),
@@ -244,7 +245,7 @@ Widget fiveOptions(BuildContext context) {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.diamond),
+                      Icon(Icons.indeterminate_check_box_outlined),
                       SizedBox(
                         width: Sizes.s10,
                       ),
@@ -262,7 +263,7 @@ Widget fiveOptions(BuildContext context) {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.diamond),
+                      Icon(Icons.tag_faces_sharp),
                       SizedBox(
                         width: Sizes.s10,
                       ),
@@ -280,7 +281,7 @@ Widget fiveOptions(BuildContext context) {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.diamond),
+                      Icon(Icons.dataset_rounded),
                       SizedBox(
                         width: Sizes.s10,
                       ),
@@ -317,7 +318,7 @@ Widget family(BuildContext context) {
             children: [
               Row(
                 children: [
-                  Icon(Icons.reviews_sharp),
+                  Icon(Icons.stars_outlined),
                   SizedBox(
                     width: Sizes.s10,
                   ),
@@ -354,7 +355,7 @@ Widget rank(BuildContext context) {
             children: [
               Row(
                 children: [
-                  Icon(Icons.reviews_sharp),
+                  Icon(Icons.bar_chart_outlined),
                   SizedBox(
                     width: Sizes.s10,
                   ),
@@ -391,7 +392,7 @@ Widget myEvent(BuildContext context) {
             children: [
               Row(
                 children: [
-                  Icon(Icons.reviews_sharp),
+                  Icon(Icons.event),
                   SizedBox(
                     width: Sizes.s10,
                   ),

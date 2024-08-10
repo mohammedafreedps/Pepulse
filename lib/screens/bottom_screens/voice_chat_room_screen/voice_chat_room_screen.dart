@@ -34,7 +34,6 @@ class VoiceChatRoomScreen extends StatelessWidget {
               rooms(),
               SizedBox(height: Insets.i50,),
               Expanded(child: recomentedRoom()),
-             
             ],
           ),
         ),

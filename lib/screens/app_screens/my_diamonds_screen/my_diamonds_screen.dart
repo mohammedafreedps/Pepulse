@@ -8,7 +8,10 @@ class MyDiamondsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Diamonds',style: AppCss.manropeBold18,),
+        title: Text(
+          'My Diamonds',
+          style: AppCss.manropeBold18,
+        ),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.history))],
       ),
       body: Padding(
@@ -45,7 +48,15 @@ Widget totalDiamondsAndCartButton() {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Icon(Icons.diamond), Text('Total Diamonds',style: AppCss.manrope.copyWith(color: appCtrl.appTheme.greyText),)],
+          children: [
+            Icon(
+              Icons.diamond,
+            ),
+            Text(
+              'Total Diamonds',
+              style: AppCss.manrope.copyWith(color: appCtrl.appTheme.greyText),
+            )
+          ],
         ),
         SizedBox(
           height: 30,
@@ -55,7 +66,10 @@ Widget totalDiamondsAndCartButton() {
           children: [
             Row(
               children: [
-                Icon(Icons.diamond),
+                Icon(
+                  Icons.diamond,
+                  color: Colors.amber,
+                ),
                 Text('0'),
               ],
             ),
@@ -67,7 +81,7 @@ Widget totalDiamondsAndCartButton() {
                   width: 10,
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.to(RechargeScreen());
                   },
                   child: Container(
@@ -99,8 +113,14 @@ Widget service() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Service',style: AppCss.manropeBold15.copyWith(color: appCtrl.appTheme.greyText),),
-        SizedBox(height: 20,),
+        Text(
+          'Service',
+          style:
+              AppCss.manropeBold15.copyWith(color: appCtrl.appTheme.greyText),
+        ),
+        SizedBox(
+          height: 20,
+        ),
         Container(
             padding: EdgeInsets.all(Insets.i10),
             decoration: BoxDecoration(
@@ -113,8 +133,17 @@ Widget service() {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('Premium',style: AppCss.manropeBold15,),
+                        Icon(
+                          Icons.workspace_premium,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Premium',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -122,8 +151,17 @@ Widget service() {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('Free Diamonds',style: AppCss.manropeBold15,),
+                        Icon(
+                          Icons.diamond,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Free Diamonds',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -131,8 +169,14 @@ Widget service() {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('SVIP',style: AppCss.manropeBold15,),
+                        Icon(Icons.indeterminate_check_box_outlined),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'SVIP',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     )
                   ],
@@ -145,8 +189,17 @@ Widget service() {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('Noble',style: AppCss.manropeBold15,),
+                        Icon(
+                          Icons.tag_faces_sharp,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Noble',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -154,8 +207,17 @@ Widget service() {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('Family',style: AppCss.manropeBold15,),
+                        Icon(
+                          Icons.stars_outlined,
+                          color: Colors.purple,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Family',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -163,8 +225,17 @@ Widget service() {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.abc),
-                        Text('Store',style: AppCss.manropeBold15,),
+                        Icon(
+                          Icons.store,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Store',
+                          style: AppCss.manropeBold15,
+                        ),
                       ],
                     )
                   ],
@@ -185,15 +256,33 @@ Widget game() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Game',style: AppCss.manropeBold15.copyWith(color: appCtrl.appTheme.greyText),),
-        SizedBox(height: 20,),
+        Text(
+          'Game',
+          style:
+              AppCss.manropeBold15.copyWith(color: appCtrl.appTheme.greyText),
+        ),
+        SizedBox(
+          height: 20,
+        ),
         Container(
           padding: EdgeInsets.all(Insets.i10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppRadius.r10),
               border: Border.all(color: appCtrl.appTheme.borderColor)),
           child: Row(
-            children: [Icon(Icons.confirmation_num), Text('Desert',style: AppCss.manropeBold15,)],
+            children: [
+              Icon(
+                Icons.monetization_on,
+                color: Colors.yellow,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                'Desert',
+                style: AppCss.manropeBold15,
+              )
+            ],
           ),
         ),
       ],

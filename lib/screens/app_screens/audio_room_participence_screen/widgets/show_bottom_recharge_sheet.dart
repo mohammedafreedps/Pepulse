@@ -1,4 +1,5 @@
 import 'package:chatzy/config.dart';
+import 'package:chatzy/widgets/payment_bottom_sheet.dart';
 
 Future showBottomRechargeSheet(BuildContext context) {
   return showModalBottomSheet(
@@ -46,8 +47,8 @@ Future showBottomRechargeSheet(BuildContext context) {
                   padding: const EdgeInsets.only(
                       top: Insets.i15, left: Insets.i15, right: Insets.i15),
                   child: TabBarView(children: [
-                    googleWalletPage(),
-                    friendsPayPage()
+                    googleWalletPage(context),
+                    friendsPayPage(context)
                   ]),
                 ),
               )),
@@ -55,7 +56,7 @@ Future showBottomRechargeSheet(BuildContext context) {
       });
 }
 
-Widget googleWalletPage() {
+Widget googleWalletPage(BuildContext context) {
   return GridView.builder(
     physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -66,11 +67,11 @@ Widget googleWalletPage() {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10),
       itemBuilder: (context, index) {
-        return rechargeTile(dimondsWallet[index].toString(),price:  price[index].toString());
+        return rechargeTile(context, dimondsWallet[index].toString(),price:  price[index].toString());
       });
 }
 
-Widget friendsPayPage() {
+Widget friendsPayPage(BuildContext context) {
   return GridView.builder(
     physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -81,11 +82,11 @@ Widget friendsPayPage() {
           mainAxisSpacing: 10,
           crossAxisSpacing: 10),
       itemBuilder: (context, index) {
-        return rechargeTile(dimondsWallet[index].toString(),isFriendPay: true);
+        return rechargeTile(context,dimondsWallet[index].toString(),isFriendPay: true);
       });
 }
 
-Widget rechargeTile(String dimonds,{bool isFriendPay = false, String price = '',}) {
+Widget rechargeTile(BuildContext context, String dimonds,{bool isFriendPay = false, String price = '',}) {
   return Container(
     decoration: BoxDecoration(
         border: Border.all(color: appCtrl.appTheme.divider),
@@ -101,18 +102,25 @@ Widget rechargeTile(String dimonds,{bool isFriendPay = false, String price = '',
           children: [Icon(Icons.diamond), Text(dimonds)],
         ),
         isFriendPay ? Container() : Text('INR $price'),
-        Container(
-          decoration: BoxDecoration(
-              color: appCtrl.appTheme.primary,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(AppRadius.r10),bottomRight: Radius.circular(AppRadius.r10))),
-          width: double.infinity,
-          height: Sizes.s40,
-          child: Center(
-            child: Text(
-              'Recharge',
-              style:
-                  AppCss.manropeBold14.copyWith(color: appCtrl.appTheme.white),
+        InkWell(
+          onTap: (){
+            if(!isFriendPay){
+              paymentBottomSheet(context);
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                color: appCtrl.appTheme.primary,
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(AppRadius.r10),bottomRight: Radius.circular(AppRadius.r10))),
+            width: double.infinity,
+            height: Sizes.s40,
+            child: Center(
+              child: Text(
+                'Recharge',
+                style:
+                    AppCss.manropeBold14.copyWith(color: appCtrl.appTheme.white),
+              ),
             ),
           ),
         )

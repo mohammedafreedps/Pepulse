@@ -27,17 +27,17 @@ class RechargeScreen extends StatelessWidget {
               Divider(color: appCtrl.appTheme.borderColor),
               GetX<RechargeScreenController>(
                 builder: (controller) {
-                  return googleWallet(controller.showGoogleWallet.value);
+                  return googleWallet(context, controller.showGoogleWallet.value);
                 }
               ),
               GetX<RechargeScreenController>(
                 builder: (controller) {
-                  return creditDebitCard(controller.showCard.value);
+                  return creditDebitCard(context, controller.showCard.value);
                 }
               ),
               GetX<RechargeScreenController>(
                 builder: (controller) {
-                  return friendsPay(controller.showFriendPay.value);
+                  return friendsPay(context, controller.showFriendPay.value);
                 }
               )
             ],
@@ -90,7 +90,7 @@ Widget coupons() {
       children: [
         Row(
           children: [
-            Icon(Icons.airplane_ticket),
+            Icon(Icons.airplane_ticket_outlined,color: Colors.amber,),
             SizedBox(width: 20),
             Text('Coupons',style: AppCss.manrope,),
           ],
@@ -129,7 +129,7 @@ Widget currentLocation() {
   );
 }
 
-Widget googleWallet(bool show) {
+Widget googleWallet(BuildContext context, bool show) {
   RechargeScreenController _rechargeController = Get.find();
   return Container(
     decoration: BoxDecoration(
@@ -162,7 +162,7 @@ Widget googleWallet(bool show) {
               crossAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
-              return rechargeTile(
+              return rechargeTile(context,
                 dimondsWallet[index].toString(),
                 price: price[index].toString(),
               );
@@ -174,7 +174,7 @@ Widget googleWallet(bool show) {
   );
 }
 
-Widget creditDebitCard(bool show) {
+Widget creditDebitCard(BuildContext context, bool show) {
   RechargeScreenController _rechargeController = Get.find();
   return Container(
     decoration: BoxDecoration(
@@ -207,7 +207,7 @@ Widget creditDebitCard(bool show) {
               crossAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
-              return rechargeTile(
+              return rechargeTile(context,
                 dimondsCard[index].toString(),
                 price: dimondsPrice[index].toString(),
               );
@@ -219,7 +219,7 @@ Widget creditDebitCard(bool show) {
   );
 }
 
-Widget friendsPay(bool show) {
+Widget friendsPay(BuildContext context, bool show) {
   RechargeScreenController _rechargeController = Get.find();
   return Container(
     decoration: BoxDecoration(
@@ -252,7 +252,7 @@ Widget friendsPay(bool show) {
               crossAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
-              return rechargeTile(dimondsWallet[index].toString(),
+              return rechargeTile(context ,dimondsWallet[index].toString(),
                   isFriendPay: true);
             },
           ),
