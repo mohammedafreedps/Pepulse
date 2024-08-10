@@ -107,7 +107,7 @@ class _AudioRoomParticipenceScreenState
                             child: participenceBuilder(false, context));
                       }
                     }),
-                    voiceBottomBar(),
+                    voiceBottomBar(context),
                   ],
                 ),
               ),

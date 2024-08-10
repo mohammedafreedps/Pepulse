@@ -11,7 +11,7 @@ Widget hostCallFloatingButton({required VoiceChatRoomController controller,requi
       backgroundColor: appCtrl.appTheme.primary,
       onPressed: () {
         controller2.initializeAgora(isBroadcaster: true);
-        // controller.becomeHoster(isHoster: true);
+        controller.becomeHoster(isHoster: true);
         controller.playJoinAudio();
         HapticFeedback.mediumImpact();
         controller2.createRoom();

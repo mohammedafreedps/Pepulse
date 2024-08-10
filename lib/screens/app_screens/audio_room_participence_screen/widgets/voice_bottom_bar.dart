@@ -1,7 +1,8 @@
 import 'package:chatzy/config.dart';
 import 'package:chatzy/controllers/app_pages_controllers/audio_room_controller.dart';
+import 'package:chatzy/screens/app_screens/audio_room_participence_screen/widgets/show_bottom_recharge_sheet.dart';
 
-Widget voiceBottomBar() {
+Widget voiceBottomBar(BuildContext context) {
   return Container(
     width: double.infinity,
     child: Row(
@@ -39,7 +40,9 @@ Widget voiceBottomBar() {
               width: Insets.i10,
             ),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showBottomRechargeSheet(context);
+                },
                 icon: const Icon(Icons.card_giftcard_rounded)),
           ],
         )

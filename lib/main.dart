@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:camera/camera.dart';
+import 'package:chatzy/controllers/app_pages_controllers/recharge_screen_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,6 +24,7 @@ void main() async {
   Get.put(AppController());
   Get.put(FirebaseCommonController());
   Get.put(CustomNotificationController());
+  Get.put(RechargeScreenController());
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark,
